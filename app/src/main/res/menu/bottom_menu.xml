@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/constructor"
+        android:title="@string/constructor"
+        android:enabled="true"
+        android:icon="@drawable/constructor_icon"
+        />
+    <item
+        android:id="@+id/catalog"
+        android:title="@string/catalog"
+        android:enabled="true"
+        android:icon="@drawable/catalog_icon"
+        />
+    <item
+        android:id="@+id/assistant"
+        android:title="@string/assistant"
+        android:enabled="true"
+        android:icon="@drawable/assistant_icon"
+        />
+    <item
+        android:id="@+id/chat"
+        android:title="@string/chat"
+        android:enabled="true"
+        android:icon="@drawable/chat_con"
+        />
+</menu>

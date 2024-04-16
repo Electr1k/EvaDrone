@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">EvaDrone</string>
+    <string name="constructor">Конструктор</string>
+    <string name="catalog">Каталог</string>
+    <string name="assistant">Ассистент</string>
+    <string name="chat">Чат</string>
+</resources>
