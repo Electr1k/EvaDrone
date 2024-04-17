@@ -19,6 +19,9 @@
     <fragment android:id="@+id/constructor"
         android:name="ru.trifonov.evadrone.fragment.Constructor"
         tools:layout="@layout/constructor_fragment">
+        <action
+            android:id="@+id/action_constructor_to_catalog"
+            app:destination="@+id/catalog"/>
     </fragment>
 
     <fragment android:id="@+id/catalog"

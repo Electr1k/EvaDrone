@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/air_screw_item">
+
+    <TextView
+        android:id="@+id/title"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="7dp"
+        android:layout_marginTop="5dp"
+        android:fontFamily="@font/montserrat_bold"
+        android:text="Название: "
+        android:textColor="@color/splash_screen_background"
+        android:textSize="14sp"
+        app:layout_constraintEnd_toStartOf="@+id/delete"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/subTitle"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="7dp"
+        android:layout_marginTop="5dp"
+        android:fontFamily="@font/montserrat_bold"
+        android:text="Количество обротв / м: "
+        android:textColor="@color/splash_screen_background"
+        android:textSize="12sp"
+        app:layout_constraintEnd_toStartOf="@+id/delete"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/title" />
+
+
+    <Button
+        android:id="@+id/delete"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="12dp"
+        android:backgroundTint="#FF7171"
+        android:minWidth="0dp"
+        android:minHeight="0dp"
+        android:paddingHorizontal="3dp"
+        android:paddingVertical="7dp"
+        android:paddingTop="2dp"
+        android:text="Удалить"
+        android:textColor="@color/splash_screen_background"
+        android:textSize="12dp"
+        app:cornerRadius="4dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/title"
+        app:layout_constraintTop_toTopOf="parent" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
