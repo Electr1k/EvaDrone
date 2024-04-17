@@ -6,7 +6,7 @@ class Motors(
     description: String,
     avgPrice: Int? = null,
     weight: Float,
-    val needVolt: Float,
-    val needAmper: Float,
+    needVolt: Float,
+    needAmper: Float,
     val speedCycle: Int,
-): Component(id, title, description, avgPrice, weight)
+): Component(id, title, description, avgPrice, weight, needVolt, needAmper)

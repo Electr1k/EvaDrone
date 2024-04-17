@@ -4,4 +4,7 @@
     <string name="catalog">Каталог</string>
     <string name="assistant">Ассистент</string>
     <string name="chat">Чат</string>
+    <string name="is_compatibility">Комплектующие совместимы</string>
+    <string name="is_not_compatibility">Комплектующие не совместимы</string>
+    <string name="need_components">Необходимые комплектующие: </string>
 </resources>

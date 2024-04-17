@@ -8,4 +8,6 @@ abstract class Component(
     val description: String,
     val avgPrice: Int? = null,
     val weight: Float,
+    val needVolt: Float = 0f,
+    val needAmper: Float = 0f,
 )

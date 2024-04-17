@@ -4,4 +4,6 @@
     <color name="white">#FFFFFFFF</color>
     <color name="main_background">#C0D1DF</color>
     <color name="splash_screen_background">#586085</color>
+    <color name="green">#00BF00</color>
+    <color name="red">#BA0000</color>
 </resources>

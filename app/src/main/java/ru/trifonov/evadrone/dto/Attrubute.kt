@@ -6,4 +6,6 @@ class Attrubute(
     description: String,
     avgPrice: Int? = null,
     weight: Float,
-): Component(id, title, description, avgPrice, weight)
+    needVolt: Float = 0f,
+    needAmper: Float = 0f,
+): Component(id, title, description, avgPrice, weight, needVolt, needAmper)

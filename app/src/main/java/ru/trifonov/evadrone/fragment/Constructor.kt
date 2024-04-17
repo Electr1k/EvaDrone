@@ -16,6 +16,7 @@ import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.bottomsheet.BottomSheetBehavior
+import ru.trifonov.evadrone.MainActivity
 import ru.trifonov.evadrone.R
 import ru.trifonov.evadrone.adpter.AccumulatorAdapter
 import ru.trifonov.evadrone.adpter.AirScrewsAdapter
@@ -26,12 +27,12 @@ import ru.trifonov.evadrone.dto.Accumulator
 import ru.trifonov.evadrone.dto.AirScrew
 import ru.trifonov.evadrone.dto.Attrubute
 import ru.trifonov.evadrone.dto.Body
-import ru.trifonov.evadrone.dto.Component
 import ru.trifonov.evadrone.dto.Motors
 
 
 class Constructor : Fragment() {
 
+    private lateinit var baseActivity: MainActivity
     private lateinit var mBottomSheet: LinearLayout
     private lateinit var mBottomSheetBehavior: BottomSheetBehavior<LinearLayout>
     private lateinit var mConstructor: ConstraintLayout
@@ -41,6 +42,7 @@ class Constructor : Fragment() {
     private lateinit var mAccumulator: CardView
     private lateinit var mMoreAttrs: CardView
     private lateinit var mDroneIcon: ImageView
+    private lateinit var navBar: CardView
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -51,6 +53,7 @@ class Constructor : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        baseActivity = requireActivity() as MainActivity
         mBottomSheet = view.findViewById(R.id.bottom_sheet)
         mConstructor = view.findViewById(R.id.constructor)
         mAirCrews = view.findViewById(R.id.airscrew)
@@ -59,6 +62,7 @@ class Constructor : Fragment() {
         mAccumulator = view.findViewById(R.id.accumulator)
         mMoreAttrs = view.findViewById(R.id.more)
         mDroneIcon = view.findViewById(R.id.drone_icon)
+        navBar = baseActivity.findViewById(R.id.cardNav)
 
         mAirCrews.setOnClickListener {
             dialogBuilder(AirScrewsAdapter(
@@ -76,7 +80,7 @@ class Constructor : Fragment() {
         ), "Двигатели") }
         mBody.setOnClickListener { dialogBuilder(BodyAdapter(
             arrayListOf(
-                Body(id = 0, title = "Корпус титан", description = "", 1000, 4f, "Титан")
+                Body(id = 0, title = "Корпус титан", description = "", 1000, 4f, "Титан", 4)
             )
         ), "Корпус")}
         mAccumulator.setOnClickListener { dialogBuilder(AccumulatorAdapter(
@@ -111,6 +115,7 @@ class Constructor : Fragment() {
                     mAccumulator.translationX = mAccumulator.width * slideOffset * 2f
                     mBody.translationX = mBody.width * slideOffset * 1.5f
                     mDroneIcon.translationY = -mDroneIcon.height * slideOffset * 1.5f
+                    navBar.translationY = navBar.height * slideOffset * 1.5f
                 }
 
             })
