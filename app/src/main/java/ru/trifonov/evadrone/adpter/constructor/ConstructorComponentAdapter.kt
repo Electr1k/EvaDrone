@@ -7,11 +7,11 @@ import android.widget.Button
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import ru.trifonov.evadrone.R
-import ru.trifonov.evadrone.dto.Attrubute
+import ru.trifonov.evadrone.dto.Component
 
-class AttributeAdapter (
-    private var airCrewList: ArrayList<Attrubute>,
-): RecyclerView.Adapter<AttributeAdapter.AirScrewViewHolder>() {
+class ConstructorComponentAdapter (
+    private var components: ArrayList<Component>,
+): RecyclerView.Adapter<ConstructorComponentAdapter.AirScrewViewHolder>() {
     override fun onCreateViewHolder(
         parent: ViewGroup,
         viewType: Int
@@ -20,15 +20,15 @@ class AttributeAdapter (
         return AirScrewViewHolder(view)
     }
     override fun getItemCount(): Int {
-        return airCrewList.size
+        return components.size
     }
 
     override fun onBindViewHolder(holder: AirScrewViewHolder, position: Int) {
 
-        holder.title.text = "Название: ${airCrewList[position].title}"
-        holder.subTitle.text = "Вес: ${airCrewList[position].weight} кг."
+        holder.title.text = "Название: ${components[position].title}"
+        holder.subTitle.text = components[position].getFavoriteAttributes()
         holder.removeBtn.setOnClickListener {
-            airCrewList.removeAt(position)
+            components.removeAt(position)
             notifyDataSetChanged()
         }
     }

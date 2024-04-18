@@ -7,4 +7,13 @@ class AirScrew(
     avgPrice: Int? = null,
     weight: Float,
     val length: Float
-): Component(id, title, description, avgPrice, weight)
+): Component(id, title, description, avgPrice, weight) {
+    override fun getAttributes(): String {
+        return "Длинна: $length м.\n" +
+            "Масса: $weight кг"
+    }
+
+    override fun getFavoriteAttributes(): String {
+        return "Длинна: $length м."
+    }
+}

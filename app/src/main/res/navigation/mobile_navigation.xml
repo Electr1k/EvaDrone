@@ -35,6 +35,13 @@
     <fragment android:id="@+id/list_components"
         android:name="ru.trifonov.evadrone.fragment.ListComponents"
         tools:layout="@layout/catalog_fragment">
+        <action
+            android:id="@+id/action_list_components_to_detailed_component"
+            app:destination="@+id/detailed_component"/>
+    </fragment>
+    <fragment android:id="@+id/detailed_component"
+        android:name="ru.trifonov.evadrone.fragment.DetailedComponent"
+        tools:layout="@layout/detailed_component_fragment">
 
     </fragment>
 

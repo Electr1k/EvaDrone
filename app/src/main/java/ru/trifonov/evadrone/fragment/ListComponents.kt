@@ -7,16 +7,15 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import ru.trifonov.evadrone.R
-import ru.trifonov.evadrone.adpter.ComponentTypeAdapter
-import ru.trifonov.evadrone.adpter.catalog.AirScrewsCatalogAdapter
+import ru.trifonov.evadrone.adpter.catalog.CatalogComponentAdapter
 import ru.trifonov.evadrone.dto.Accumulator
 import ru.trifonov.evadrone.dto.AirScrew
 import ru.trifonov.evadrone.dto.Attrubute
 import ru.trifonov.evadrone.dto.Body
 import ru.trifonov.evadrone.dto.Component
-import ru.trifonov.evadrone.dto.ComponentType
 import ru.trifonov.evadrone.dto.Motors
 
 
@@ -35,7 +34,7 @@ class ListComponents : Fragment() {
         componentsRV = view.findViewById(R.id.rv)
         view.findViewById<TextView>(R.id.title).setText("Корпус")
         val id = arguments?.getInt("id")
-        componentsRV.adapter = AirScrewsCatalogAdapter(getComponentsByTypeId(id!!))
+        componentsRV.adapter = CatalogComponentAdapter(getComponentsByTypeId(id!!), findNavController())
 
     }
     private fun getComponentsByTypeId(id: Int): ArrayList<Component>{

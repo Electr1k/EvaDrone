@@ -18,15 +18,12 @@ import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import ru.trifonov.evadrone.MainActivity
 import ru.trifonov.evadrone.R
-import ru.trifonov.evadrone.adpter.constructor.AccumulatorAdapter
-import ru.trifonov.evadrone.adpter.constructor.AirScrewsAdapter
-import ru.trifonov.evadrone.adpter.constructor.AttributeAdapter
-import ru.trifonov.evadrone.adpter.constructor.BodyAdapter
-import ru.trifonov.evadrone.adpter.constructor.MotorsAdapter
+import ru.trifonov.evadrone.adpter.constructor.ConstructorComponentAdapter
 import ru.trifonov.evadrone.dto.Accumulator
 import ru.trifonov.evadrone.dto.AirScrew
 import ru.trifonov.evadrone.dto.Attrubute
 import ru.trifonov.evadrone.dto.Body
+import ru.trifonov.evadrone.dto.Component
 import ru.trifonov.evadrone.dto.Motors
 
 
@@ -65,38 +62,28 @@ class Constructor : Fragment() {
         navBar = baseActivity.findViewById(R.id.cardNav)
         mAirCrews.setOnClickListener {
             dialogBuilder(
-                AirScrewsAdapter(
                 arrayListOf(
                     AirScrew(0, "Винт АФП-324", description = "", 424, 0.1f,20f),
                     AirScrew(0, "Винт АФП-324", description = "", 424, 0.1f,20f),
-                )
             ), "Винты")
         }
         mMotors.setOnClickListener { dialogBuilder(
-            MotorsAdapter(
             arrayListOf(
                 Motors(0, "Привод F37-43", description = "", 424, 0.3f, 4.4f, 0.4f, 4535),
                 Motors(0, "Привод F37-43", description = "", 424, 0.3f, 4.4f, 0.4f, 5435),
-            )
         ), "Двигатели") }
         mBody.setOnClickListener { dialogBuilder(
-            BodyAdapter(
             arrayListOf(
                 Body(id = 0, title = "Корпус титан", description = "", 1000, 4f, "Титан", 4)
-            )
-        ), "Корпус")}
+            ), "Корпус")}
         mAccumulator.setOnClickListener { dialogBuilder(
-            AccumulatorAdapter(
             arrayListOf(
                 Accumulator(0, "Аккумулятор ТГА-314", description = "", 424, 1.1f, voltOut = 5.2f, amperOut = 35f)
-            )
-        ), "Питание") }
+            ), "Питание") }
         mMoreAttrs.setOnClickListener { dialogBuilder(
-            AttributeAdapter(
             arrayListOf(
                 Attrubute(id = 0, title = "Камера GO PRO", "",4000, weight = 0.3f)
-            )
-        ), "Другое") }
+            ), "Другое") }
         mBottomSheetBehavior =  BottomSheetBehavior.from(mBottomSheet)
         mConstructor.setPadding(0, 0, 0, 300)
         mBottomSheetBehavior.isHideable = false
@@ -126,13 +113,13 @@ class Constructor : Fragment() {
         }
     }
 
-    private fun dialogBuilder(adapter: RecyclerView.Adapter<*>, title: String){
+    private fun dialogBuilder(componentsList: ArrayList<Component>, title: String){
         val dialog = AlertDialog.Builder(requireContext()).create()
 
         dialog.window?.setBackgroundDrawable(getDrawable(requireContext(), R.drawable.dialog_rounded_background))
         val alertDialogView = dialog.window!!.decorView
         val dialogView = layoutInflater.inflate(R.layout.selected_components_list, null)
-        dialogView.findViewById<RecyclerView>(R.id.rv).adapter = adapter
+        dialogView.findViewById<RecyclerView>(R.id.rv).adapter = ConstructorComponentAdapter(componentsList)
         dialogView.findViewById<TextView>(R.id.title_component).text = title
         dialogView.findViewById<Button>(R.id.addBtn).setOnClickListener {
             dialog.cancel()
