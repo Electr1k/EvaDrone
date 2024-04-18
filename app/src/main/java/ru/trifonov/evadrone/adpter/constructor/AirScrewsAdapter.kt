@@ -1,4 +1,4 @@
-package ru.trifonov.evadrone.adpter
+package ru.trifonov.evadrone.adpter.constructor
 
 import android.view.LayoutInflater
 import android.view.View

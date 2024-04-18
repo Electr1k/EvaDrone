@@ -1,8 +1,8 @@
 package ru.trifonov.evadrone.dto
 
 class AirScrew(
-    id: Int, title:
-    String,
+    id: Int,
+    title: String,
     description: String,
     avgPrice: Int? = null,
     weight: Float,

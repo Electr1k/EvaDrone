@@ -18,11 +18,11 @@ import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import ru.trifonov.evadrone.MainActivity
 import ru.trifonov.evadrone.R
-import ru.trifonov.evadrone.adpter.AccumulatorAdapter
-import ru.trifonov.evadrone.adpter.AirScrewsAdapter
-import ru.trifonov.evadrone.adpter.AttributeAdapter
-import ru.trifonov.evadrone.adpter.BodyAdapter
-import ru.trifonov.evadrone.adpter.MotorsAdapter
+import ru.trifonov.evadrone.adpter.constructor.AccumulatorAdapter
+import ru.trifonov.evadrone.adpter.constructor.AirScrewsAdapter
+import ru.trifonov.evadrone.adpter.constructor.AttributeAdapter
+import ru.trifonov.evadrone.adpter.constructor.BodyAdapter
+import ru.trifonov.evadrone.adpter.constructor.MotorsAdapter
 import ru.trifonov.evadrone.dto.Accumulator
 import ru.trifonov.evadrone.dto.AirScrew
 import ru.trifonov.evadrone.dto.Attrubute
@@ -63,32 +63,36 @@ class Constructor : Fragment() {
         mMoreAttrs = view.findViewById(R.id.more)
         mDroneIcon = view.findViewById(R.id.drone_icon)
         navBar = baseActivity.findViewById(R.id.cardNav)
-
         mAirCrews.setOnClickListener {
-            dialogBuilder(AirScrewsAdapter(
+            dialogBuilder(
+                AirScrewsAdapter(
                 arrayListOf(
                     AirScrew(0, "Винт АФП-324", description = "", 424, 0.1f,20f),
                     AirScrew(0, "Винт АФП-324", description = "", 424, 0.1f,20f),
                 )
             ), "Винты")
         }
-        mMotors.setOnClickListener { dialogBuilder(MotorsAdapter(
+        mMotors.setOnClickListener { dialogBuilder(
+            MotorsAdapter(
             arrayListOf(
                 Motors(0, "Привод F37-43", description = "", 424, 0.3f, 4.4f, 0.4f, 4535),
                 Motors(0, "Привод F37-43", description = "", 424, 0.3f, 4.4f, 0.4f, 5435),
             )
         ), "Двигатели") }
-        mBody.setOnClickListener { dialogBuilder(BodyAdapter(
+        mBody.setOnClickListener { dialogBuilder(
+            BodyAdapter(
             arrayListOf(
                 Body(id = 0, title = "Корпус титан", description = "", 1000, 4f, "Титан", 4)
             )
         ), "Корпус")}
-        mAccumulator.setOnClickListener { dialogBuilder(AccumulatorAdapter(
+        mAccumulator.setOnClickListener { dialogBuilder(
+            AccumulatorAdapter(
             arrayListOf(
                 Accumulator(0, "Аккумулятор ТГА-314", description = "", 424, 1.1f, voltOut = 5.2f, amperOut = 35f)
             )
         ), "Питание") }
-        mMoreAttrs.setOnClickListener { dialogBuilder(AttributeAdapter(
+        mMoreAttrs.setOnClickListener { dialogBuilder(
+            AttributeAdapter(
             arrayListOf(
                 Attrubute(id = 0, title = "Камера GO PRO", "",4000, weight = 0.3f)
             )
