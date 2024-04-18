@@ -19,16 +19,12 @@ import com.google.android.material.bottomsheet.BottomSheetBehavior
 import ru.trifonov.evadrone.MainActivity
 import ru.trifonov.evadrone.R
 import ru.trifonov.evadrone.adpter.constructor.ConstructorComponentAdapter
-import ru.trifonov.evadrone.dto.Accumulator
-import ru.trifonov.evadrone.dto.AirScrew
-import ru.trifonov.evadrone.dto.Attrubute
-import ru.trifonov.evadrone.dto.Body
+import ru.trifonov.evadrone.di.ConstructorService
 import ru.trifonov.evadrone.dto.Component
-import ru.trifonov.evadrone.dto.Motors
 
 
 class Constructor : Fragment() {
-
+    private lateinit var constructorService: ConstructorService
     private lateinit var baseActivity: MainActivity
     private lateinit var mBottomSheet: LinearLayout
     private lateinit var mBottomSheetBehavior: BottomSheetBehavior<LinearLayout>
@@ -50,6 +46,7 @@ class Constructor : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        constructorService = ConstructorService.getInstance()
         baseActivity = requireActivity() as MainActivity
         mBottomSheet = view.findViewById(R.id.bottom_sheet)
         mConstructor = view.findViewById(R.id.constructor)
@@ -61,29 +58,13 @@ class Constructor : Fragment() {
         mDroneIcon = view.findViewById(R.id.drone_icon)
         navBar = baseActivity.findViewById(R.id.cardNav)
         mAirCrews.setOnClickListener {
-            dialogBuilder(
-                arrayListOf(
-                    AirScrew(0, "Винт АФП-324", description = "", 424, 0.1f,20f),
-                    AirScrew(0, "Винт АФП-324", description = "", 424, 0.1f,20f),
-            ), "Винты")
+            dialogBuilder(constructorService.getAirScrews(), "Винты")
         }
-        mMotors.setOnClickListener { dialogBuilder(
-            arrayListOf(
-                Motors(0, "Привод F37-43", description = "", 424, 0.3f, 4.4f, 0.4f, 4535),
-                Motors(0, "Привод F37-43", description = "", 424, 0.3f, 4.4f, 0.4f, 5435),
-        ), "Двигатели") }
-        mBody.setOnClickListener { dialogBuilder(
-            arrayListOf(
-                Body(id = 0, title = "Корпус титан", description = "", 1000, 4f, "Титан", 4)
-            ), "Корпус")}
-        mAccumulator.setOnClickListener { dialogBuilder(
-            arrayListOf(
-                Accumulator(0, "Аккумулятор ТГА-314", description = "", 424, 1.1f, voltOut = 5.2f, amperOut = 35f)
-            ), "Питание") }
-        mMoreAttrs.setOnClickListener { dialogBuilder(
-            arrayListOf(
-                Attrubute(id = 0, title = "Камера GO PRO", "",4000, weight = 0.3f)
-            ), "Другое") }
+
+        mMotors.setOnClickListener { dialogBuilder(constructorService.getMotors(), "Двигатели") }
+        mBody.setOnClickListener { dialogBuilderSingleComponent(constructorService.getBody(), "Корпус")}
+        mAccumulator.setOnClickListener { dialogBuilder(constructorService.getAccumulators(), "Питание") }
+        mMoreAttrs.setOnClickListener { dialogBuilder(constructorService.getAttributes(), "Другое") }
         mBottomSheetBehavior =  BottomSheetBehavior.from(mBottomSheet)
         mConstructor.setPadding(0, 0, 0, 300)
         mBottomSheetBehavior.isHideable = false
@@ -113,14 +94,34 @@ class Constructor : Fragment() {
         }
     }
 
-    private fun dialogBuilder(componentsList: ArrayList<Component>, title: String){
+    private fun dialogBuilder(componentsList: List<Component>, title: String){
         val dialog = AlertDialog.Builder(requireContext()).create()
 
         dialog.window?.setBackgroundDrawable(getDrawable(requireContext(), R.drawable.dialog_rounded_background))
         val alertDialogView = dialog.window!!.decorView
         val dialogView = layoutInflater.inflate(R.layout.selected_components_list, null)
-        dialogView.findViewById<RecyclerView>(R.id.rv).adapter = ConstructorComponentAdapter(componentsList)
-        dialogView.findViewById<TextView>(R.id.title_component).text = title
+        dialogView.findViewById<RecyclerView>(R.id.rv).adapter = ConstructorComponentAdapter(componentsList.toMutableList())
+        dialogView.findViewById<TextView>(R.id.title_type_component).text = title
+        dialogView.findViewById<Button>(R.id.addBtn).setOnClickListener {
+            dialog.cancel()
+            findNavController().navigate(R.id.action_constructor_to_catalog)
+        }
+        val viewGroup = alertDialogView as ViewGroup
+        viewGroup.addView(dialogView)
+        dialog.show()
+    }
+
+    private fun dialogBuilderSingleComponent(component: Component?, title: String){
+        val dialog = AlertDialog.Builder(requireContext()).create()
+
+        dialog.window?.setBackgroundDrawable(getDrawable(requireContext(), R.drawable.dialog_rounded_background))
+        val alertDialogView = dialog.window!!.decorView
+        val dialogView = layoutInflater.inflate(R.layout.selected_components_list, null)
+        dialogView.findViewById<RecyclerView>(R.id.rv).adapter = ConstructorComponentAdapter(mutableListOf<Component>().also { if (component!=null) it.add(component) }){
+            if (constructorService.getBody() != null) dialogView.findViewById<Button>(R.id.addBtn).visibility = View.VISIBLE
+        }
+        dialogView.findViewById<TextView>(R.id.title_type_component).text = title
+        if (constructorService.getBody() != null) dialogView.findViewById<Button>(R.id.addBtn).visibility = View.GONE
         dialogView.findViewById<Button>(R.id.addBtn).setOnClickListener {
             dialog.cancel()
             findNavController().navigate(R.id.action_constructor_to_catalog)

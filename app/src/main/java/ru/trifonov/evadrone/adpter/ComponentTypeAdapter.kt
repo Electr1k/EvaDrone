@@ -14,7 +14,7 @@ import ru.trifonov.evadrone.dto.AirScrew
 import ru.trifonov.evadrone.dto.ComponentType
 
 class ComponentTypeAdapter (
-    private var typeList: ArrayList<ComponentType>,
+    private var typeList: List<ComponentType>,
     private var navController: NavController
 ): RecyclerView.Adapter<ComponentTypeAdapter.ComponentViewHolder>() {
     override fun onCreateViewHolder(

@@ -10,7 +10,8 @@ import ru.trifonov.evadrone.R
 import ru.trifonov.evadrone.dto.Component
 
 class ConstructorComponentAdapter (
-    private var components: ArrayList<Component>,
+    private var components: MutableList<Component>,
+    private val onRemove: () -> Unit = {}
 ): RecyclerView.Adapter<ConstructorComponentAdapter.AirScrewViewHolder>() {
     override fun onCreateViewHolder(
         parent: ViewGroup,
@@ -29,6 +30,7 @@ class ConstructorComponentAdapter (
         holder.subTitle.text = components[position].getFavoriteAttributes()
         holder.removeBtn.setOnClickListener {
             components.removeAt(position)
+            onRemove()
             notifyDataSetChanged()
         }
     }

@@ -1,15 +1,16 @@
 package ru.trifonov.evadrone.dto
 
-class Motors(
-    id: Int, title:
-    String,
+class Motor(
+    id: Int,
+    title: String,
+    typeId: Int = 1,
     description: String,
     avgPrice: Int? = null,
     weight: Float,
     needVolt: Float,
     needAmper: Float,
     val speedCycle: Int,
-): Component(id, title, description, avgPrice, weight, needVolt, needAmper){
+): Component(id, title, description, avgPrice, weight, needVolt, needAmper, typeId = typeId){
 
     override fun getAttributes(): String {
         return "Масса: $weight кг\n" +

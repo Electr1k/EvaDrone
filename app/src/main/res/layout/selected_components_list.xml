@@ -3,9 +3,10 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:paddingBottom="5dp"
     android:id="@+id/selected_components_list">
     <TextView
-        android:id="@+id/title_component"
+        android:id="@+id/title_type_component"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Винты"
@@ -21,7 +22,7 @@
         android:id="@+id/rv"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@id/title_component"
+        app:layout_constraintTop_toBottomOf="@id/title_type_component"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
         android:paddingHorizontal="7dp"
         android:paddingTop="5dp"/>

@@ -10,6 +10,7 @@ abstract class Component(
     val weight: Float,
     val needVolt: Float = 0f,
     val needAmper: Float = 0f,
+    val typeId: Int
 ){
     abstract fun getAttributes(): String
 

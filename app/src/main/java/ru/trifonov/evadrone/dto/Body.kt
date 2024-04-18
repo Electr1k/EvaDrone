@@ -6,9 +6,10 @@ class Body(
     description: String,
     avgPrice: Int? = null,
     weight: Float,
+    typeId: Int = 2,
     val material: String,
     val countAirScrews: Int
-): Component(id, title, description, avgPrice, weight){
+): Component(id, title, description, avgPrice, weight, typeId = typeId){
     override fun getAttributes(): String {
         return "Масса: $weight кг\n" +
             "Материал: $material\n" +
