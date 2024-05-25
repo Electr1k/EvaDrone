@@ -5,29 +5,49 @@
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="@color/main_background"
+    android:paddingBottom="80dp"
     tools:context=".fragment.Assistant">
 
-    <ScrollView
+    <TextView
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:gravity="center"
+        android:text="Задайте вопрос AI ассистенту и он поможет Вам собрать свой беспилотник"
+        android:textSize="18sp"
+        android:textColor="@color/white"
+        android:fontFamily="@font/montserrat_bold"
+        android:layout_marginHorizontal="20dp"/>
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom"
+        android:layout_margin="10dp"
+        app:contentPadding="3dp"
+        app:cardCornerRadius="8dp"
+        app:cardBackgroundColor="@color/white">
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical">
-
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="0dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:orientation="horizontal">
+            <EditText
+                android:id="@+id/message"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:hint="Сообщение"
                 android:layout_weight="1"
-                android:background="@color/white">
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:fontFamily="@font/montserrat"
-                    android:textSize="36sp"
-                    android:text="Тут очень много текста Тут очень много текста Тут очень много текста Тут очень много текста Тут очень много текста Тут очень много текста Тут очень много текста Тут очень много текста Тут очень много текста Тут очень много текста Тут очень много текста м Тут очень много текста Тут очень много текста  Тут очень много текста Тут очень много текста Тут очень много текста Тут очень много текста Тут очень много текста Тут очень много текста Тут очень много текста"/>
-            </LinearLayout>
+                android:layout_marginStart="3dp"
+                android:textColorHint="@color/main_background"
+                android:textColor="@color/black"/>
+            <ImageView
+                android:id="@+id/sendBtn"
+                android:layout_width="32dp"
+                android:layout_height="32dp"
+                android:layout_marginHorizontal="5dp"
+                android:src="@drawable/send_message_icon"/>
+
         </LinearLayout>
-    </ScrollView>
+    </androidx.cardview.widget.CardView>
 </FrameLayout>
