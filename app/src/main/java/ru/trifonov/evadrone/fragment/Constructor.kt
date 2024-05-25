@@ -113,7 +113,7 @@ class Constructor : Fragment() {
                 }
             }
 
-            view.findViewById<TextView>(R.id.total_price).text ="Итоговая цена: ${constructorService.getPrice()}"
+            view.findViewById<TextView>(R.id.total_price).text ="Итоговая цена: ${constructorService.getPrice()} руб."
             val constraints = constructorService.checkConstraints()
             if (constraints.isEmpty()){
                 needComponentsContainer.visibility = View.GONE
