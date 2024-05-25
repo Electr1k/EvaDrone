@@ -23,6 +23,28 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
         <androidx.cardview.widget.CardView
+            android:id="@+id/constructorBtn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            app:cardCornerRadius="8dp"
+            android:elevation="3dp"
+            app:cardBackgroundColor="@color/green"
+            app:layout_constraintTop_toBottomOf="@id/drone_icon"
+            app:layout_constraintStart_toStartOf="@id/drone_icon"
+            app:layout_constraintEnd_toEndOf="@id/drone_icon"
+            >
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Собрать"
+                android:paddingHorizontal="12dp"
+                android:layout_marginVertical="6dp"
+                android:textColor="@color/white"
+                android:fontFamily="@font/montserrat_bold"
+                android:textSize="24sp"/>
+        </androidx.cardview.widget.CardView>
+        <androidx.cardview.widget.CardView
             android:id="@+id/airscrew"
             android:layout_width="0dp"
             android:layout_height="100dp"
@@ -200,6 +222,7 @@
 
     <androidx.coordinatorlayout.widget.CoordinatorLayout
         android:layout_width="match_parent"
+        android:paddingTop="30dp"
         android:layout_height="match_parent">
 
         <LinearLayout
@@ -223,22 +246,36 @@
                 android:layout_marginBottom="8dp"
                 android:layout_marginHorizontal="16dp"
                 android:orientation="vertical">
-                <TextView
-                    android:id="@+id/compatibility"
+                <LinearLayout
+                    android:id="@+id/compatibilityContainer"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="@string/is_compatibility"
-                    android:textColor="@color/green"
-                    android:fontFamily="@font/montserrat_bold"
-                    android:textSize="18sp"/>
-                <TextView
-                    android:id="@+id/need_components"
+                    android:orientation="vertical">
+
+
+                    <TextView
+                        android:id="@+id/compatibility"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/is_compatibility"
+                        android:textColor="@color/green"
+                        android:fontFamily="@font/montserrat_bold"
+                        android:textSize="18sp"/>
+                </LinearLayout>
+                <LinearLayout
+                    android:id="@+id/needComponentsContainer"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="@string/need_components"
-                    android:textColor="@color/red"
-                    android:fontFamily="@font/montserrat"
-                    android:textSize="18sp"/>
+                    android:orientation="vertical">
+                    <TextView
+                        android:id="@+id/need_components"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/need_components"
+                        android:textColor="@color/red"
+                        android:fontFamily="@font/montserrat_bold"
+                        android:textSize="18sp"/>
+                </LinearLayout>
                 <View
                     android:layout_width="match_parent"
                     android:layout_height="1dp"
@@ -270,13 +307,6 @@
                     android:layout_height="wrap_content"
                     android:orientation="vertical">
 
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Винт FX-35"
-                        android:textColor="@color/black"
-                        android:fontFamily="@font/montserrat"
-                        android:textSize="16sp"/>
                 </LinearLayout>
 
                 <LinearLayout
@@ -305,13 +335,6 @@
                     android:layout_height="wrap_content"
                     android:orientation="vertical">
 
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Electrik motors FAV"
-                        android:textColor="@color/black"
-                        android:fontFamily="@font/montserrat"
-                        android:textSize="16sp"/>
                 </LinearLayout>
 
                 <LinearLayout
@@ -340,13 +363,6 @@
                     android:layout_height="wrap_content"
                     android:orientation="vertical">
 
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Корпус MAFK-4L"
-                        android:textColor="@color/black"
-                        android:fontFamily="@font/montserrat"
-                        android:textSize="16sp"/>
                 </LinearLayout>
 
                 <LinearLayout
@@ -375,13 +391,6 @@
                     android:layout_height="wrap_content"
                     android:orientation="vertical">
 
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Аккумулятор KML-GSa"
-                        android:textColor="@color/black"
-                        android:fontFamily="@font/montserrat"
-                        android:textSize="16sp"/>
                 </LinearLayout>
 
                 <LinearLayout
@@ -410,14 +419,25 @@
                     android:layout_height="wrap_content"
                     android:orientation="vertical">
 
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Камера GO PRO"
-                        android:textColor="@color/black"
-                        android:fontFamily="@font/montserrat"
-                        android:textSize="16sp"/>
+
                 </LinearLayout>
+                <TextView
+                    android:id="@+id/total_price"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Итоговая цена: "
+                    android:textColor="@color/black"
+                    android:layout_marginTop="10dp"
+                    android:fontFamily="@font/montserrat_bold"
+                    android:textSize="18sp"/>
+                <TextView
+                    android:id="@+id/parametrs"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/black"
+                    android:layout_marginTop="10dp"
+                    android:fontFamily="@font/montserrat"
+                    android:textSize="16sp"/>
             </LinearLayout>
         </LinearLayout>
     </androidx.coordinatorlayout.widget.CoordinatorLayout>

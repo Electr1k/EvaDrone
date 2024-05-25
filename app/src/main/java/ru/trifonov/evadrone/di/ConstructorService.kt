@@ -7,6 +7,8 @@ import ru.trifonov.evadrone.dto.AirScrew
 import ru.trifonov.evadrone.dto.Attribute
 import ru.trifonov.evadrone.dto.Body
 import ru.trifonov.evadrone.dto.Motor
+import java.util.Collections.max
+import kotlin.math.max
 
 class ConstructorService private constructor(){
 
@@ -80,6 +82,80 @@ class ConstructorService private constructor(){
         this.body = null
     }
 
+    public fun checkConstraints(): List<String>{
+        val constraints = mutableListOf<String>()
+        if (airScrews.isEmpty()) constraints.add("Винты")
+        if (motors.isEmpty()) constraints.add("Двигатели")
+        if (body == null) constraints.add("Корпус")
+        if (accumulators.isEmpty()) constraints.add("Питание")
+        return constraints
+    }
 
 
+    public fun getNeedAmper(): Float{
+        var total = 0f
+        airScrews.forEach { total += it.needAmper }
+        motors.forEach { total += it.needAmper }
+        attributes.forEach { total += it.needAmper }
+        return total
+    }
+
+    public fun getNeedVolt(): Float{
+        return max(listOf(
+            if (airScrews.isNotEmpty()) airScrews.maxOf { it.needVolt } else 0f,
+            if (motors.isNotEmpty()) motors.maxOf { it.needVolt } else 0f,
+            if (attributes.isNotEmpty()) attributes.maxOf { it.needVolt } else 0f,
+        ))
+    }
+
+    public fun getOutAmper(): Float{
+        var total = 0f
+        accumulators.forEach { total += it.amperOut }
+        return total
+    }
+
+    public fun getOutVolt(): Float{
+        var total = 0f
+        accumulators.forEach { total += it.voltOut }
+        return total
+    }
+
+    public fun getWeight():Float{
+        var totalWeight = 0f
+        airScrews.map { totalWeight += it.weight ?: 0f }
+        motors.map { totalWeight += it.weight ?: 0f }
+        accumulators.map { totalWeight += it.weight ?: 0f }
+        attributes.map { totalWeight += it.weight ?: 0f }
+        if (body != null ) totalWeight += body!!.weight ?: 0f
+        return totalWeight
+    }
+
+    public fun getMaxWeight(){
+        var weight = 0f
+        var idx = 0
+//        motors.forEach { it.speedCycle
+//            * if (idx < airScrews.size) airScrews[idx++].length else {airScrews[airScrews.size].length} }
+    }
+    public fun isMaking(): Boolean{
+        return getNeedVolt() < getOutVolt() && getNeedAmper() < getOutAmper()
+    }
+    public fun getErrors(): List<String> {
+        val errors = mutableListOf<String>()
+        if (getNeedVolt() >= getOutVolt()){
+            errors.add("Недостаточное напряжение")
+        }
+        if (getNeedAmper() >= getOutAmper()){
+            errors.add("Недостаточная сил так")
+        }
+        return errors
+    }
+    public fun getPrice(): Int{
+        var totalPrice = 0
+        airScrews.map { totalPrice += it.avgPrice ?: 0 }
+        motors.map { totalPrice += it.avgPrice ?: 0 }
+        accumulators.map { totalPrice += it.avgPrice ?: 0 }
+        attributes.map { totalPrice += it.avgPrice ?: 0 }
+        if (body != null ) totalPrice += body!!.avgPrice ?: 0
+        return totalPrice
+    }
 }
