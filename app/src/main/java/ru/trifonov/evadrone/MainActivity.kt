@@ -31,6 +31,7 @@ class MainActivity : AppCompatActivity() {
             }
             else{
                 findViewById<CardView>(R.id.cardNav).visibility = View.VISIBLE
+                findViewById<CardView>(R.id.cardNav).translationY = 0f
             }
         }
 
